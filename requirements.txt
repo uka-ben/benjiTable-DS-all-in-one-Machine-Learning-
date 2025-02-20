@@ -1,9 +1,9 @@
-streamlit==1.32.0
+streamlit==1.38.0
 pandas==2.1.4
 ydata-profiling==4.6.4
 streamlit-pandas-profiling==0.1.3
-pycaret==3.3.0  # Updated to support pandas 2.x
-Pillow==10.1.0
-google-generativeai==0.3.2
-numpy>=1.24
-plotly-resampler>=0.8.3.1
+pycaret==3.3.2  # Updated to support pandas 2.x
+Pillow==10.4.0
+google-generativeai
+numpy>=1.26.4
+plotly-resampler>=0.10.0
