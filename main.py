@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] {
-    background-color: blue;
+    background-color: skyblue;
     color: black;
 }
 [data-testid="stSidebar"] {
