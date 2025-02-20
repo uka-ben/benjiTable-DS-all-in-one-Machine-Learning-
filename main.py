@@ -140,7 +140,7 @@ def ChatBot() -> None:
     )
 
     image1 = Image.open("image3.png")
-    st.logo(image1, use_container_width=True, width=300)
+    st.logo(image1, use_column_width=True, width=300)
     st.subheader("Ask benGPT anything")
 
     sidebar()
