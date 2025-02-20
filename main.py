@@ -11,13 +11,13 @@ from PIL import Image
 import google.generativeai as genai
 
 # Configuring the Streamlit app
-st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="🤖")
+st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="ðŸ¤–")
 
 # Apply custom CSS for enhanced background and lighter sidebar color
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(pink, orange, white, grn, #2c3e50, white, black);
+    background: linear-gradient(135deg,pink, #f5f7fa, skyblue, #f5f7fa);
     color: #333;
 }
 [data-testid="stSidebar"] {
@@ -104,8 +104,8 @@ def replace_key_in_dict_list(dict_list):
     return new_list
 
 def ChatBot() -> None:
-    ''' Stuff you see on Main page '''
-    st.header("🎇 benGPT", divider="orange")
+    ''' Chatbot Page '''
+    st.header("benGPT", divider="orange")
     st.markdown(
         """
         **WELCOME TO THE WORLD OF PRO-HUMANOID INTELLIGENCE**
@@ -115,7 +115,7 @@ def ChatBot() -> None:
     )
 
     image1 = Image.open("image3.png")
-    st.image(image1, use_column_width=True, width=300)
+    st.image(image1, width=300)
     st.subheader("Ask benGPT anything")
 
     for message in st.session_state.messages:
@@ -146,16 +146,21 @@ def ChatBot() -> None:
 
         st.session_state.history.extend([{"role": "user", "contents": prompt}, {"role": "assistant", "contents": response}])
 
-# Handle page routing
+# Navigation bar
+st.markdown("<h1 style='text-align: center;'>benjiTable DS</h1>", unsafe_allow_html=True)
+image1 = Image.open("mypiclogo.png")
+st.image(image1)
+st.markdown("<p style='text-align: center; color: #666;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
 choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"], horizontal=True)
 
+
+
+
+# Handle page routing
 if choices == 'Upload Dataset':
-    image1 = Image.open("image5.png")
-    st.image(image1, use_column_width=True, width=300)
-    st.subheader(""" <<<👈click benGPT, Exploratory Data Analytics, Machine Learning
-             """)
-    st.title('📁 plug in Your Dataset')
-    st.write("Begin exploring and building machine learning models.")
+    
+    st.title('ðŸ“ Upload Dataset For Modeling & Analysis')
+    st.write("Begin exploring and building machine learning models by uploading your dataset.")
     file = st.file_uploader("**Upload a CSV file**", type=["csv"])
     
     if file:
@@ -168,7 +173,7 @@ if choices == 'Upload Dataset':
         st.warning("Please upload a CSV file to continue.")
 
 elif choices == 'Explore Data':
-    st.title('🔍 Exploratory Data Analysis (EDA)')
+    st.title('ðŸ” Exploratory Data Analysis (EDA)')
     st.write("Generate in-depth exploratory reports to understand the data before building any models.")
     
     if os.path.exists('dataset.csv'):
@@ -176,7 +181,6 @@ elif choices == 'Explore Data':
         st.write("### Dataset Overview:")
         st.dataframe(df)
 
-        # Add a button to generate the report
         if st.button("Generate Report", key="generate_report"):
             with st.spinner("Generating detailed report... This may take a moment."):
                 profile = ProfileReport(df)
@@ -187,7 +191,7 @@ elif choices == 'Explore Data':
         st.error("No dataset found. Please upload a dataset first.")
 
 elif choices == 'Build Models':
-    st.title('🤖 Machine Learning Modeling')
+    st.title('Machine Learning Modeling')
     st.write("Select a machine learning task to proceed with automated model training and evaluation.")
     
     if os.path.exists('dataset.csv'):
@@ -196,37 +200,36 @@ elif choices == 'Build Models':
         exp_choice = st.radio("Choose a Machine Learning Task", ["Classification", "Regression", "Clustering", "Anomaly Detection"])
 
         if exp_choice == "Classification":
-            st.header('📊 Classification Task')
+            st.header('ðŸ“Š Classification Task')
             st.write("In this section, you'll train classification models to predict categorical outcomes based on your dataset.")
             X = st.multiselect("**Select Features for Training**", df.columns)
             y = st.selectbox("**Select Target Variable**", df.columns)
 
             if X and y:
                 data = df[X + [y]]
-                if st.button('🚀 Start Training'):
-                    st.write("Running Classification Experiment... ⏳")
+                if st.button('ðŸš€ Start Training'):
+                    st.write("Running Classification Experiment... â³")
                     cls = ClassificationExperiment()
                     cls.setup(data, target=y)
                     setup_df = cls.pull()
-
                     st.write("### Model Setup Summary:")
                     st.dataframe(setup_df)
 
-                    st.write("### Comparing Models... 📈")
+                    st.write("### Comparing Models... ðŸ“ˆ")
                     best_model = cls.compare_models()
                     st.write("### Best Model:")
                     st.dataframe(cls.pull())
 
         elif exp_choice == "Regression":
-            st.header('📉 Regression Task')
+            st.header('ðŸ“‰ Regression Task')
             st.write("In this section, you'll train regression models to predict continuous outcomes based on your dataset.")
             X = st.multiselect("**Select Features for Training**", df.columns)
             y = st.selectbox("**Select Target Variable**", df.columns)
 
             if X and y:
                 data = df[X + [y]]
-                if st.button('🚀 Start Training'):
-                    st.write("Running Regression Experiment... ⏳")
+                if st.button('ðŸš€ Start Training'):
+                    st.write("Running Regression Experiment... â³")
                     reg = RegressionExperiment()
                     reg.setup(data, target=y)
                     setup_df = reg.pull()
@@ -234,20 +237,20 @@ elif choices == 'Build Models':
                     st.write("### Model Setup Summary:")
                     st.dataframe(setup_df)
 
-                    st.write("### Comparing Models... 📈")
+                    st.write("### Comparing Models... ðŸ“ˆ")
                     best_model = reg.compare_models()
                     st.write("### Best Model:")
                     st.dataframe(reg.pull())
 
         elif exp_choice == "Clustering":
-            st.header('🔍 Clustering Task')
+            st.header('ðŸ” Clustering Task')
             st.write("In this section, you'll perform clustering to find patterns or groupings in your dataset.")
             X = st.multiselect("**Select Features for Clustering**", df.columns)
 
             if X:
                 data = df[X]
-                if st.button('🚀 Start Clustering'):
-                    st.write("Running Clustering Experiment... ⏳")
+                if st.button('ðŸš€ Start Clustering'):
+                    st.write("Running Clustering Experiment... â³")
                     clus = ClusteringExperiment()
                     clus.setup(data)
                     setup_df = clus.pull()
@@ -255,20 +258,20 @@ elif choices == 'Build Models':
                     st.write("### Clustering Setup Summary:")
                     st.dataframe(setup_df)
 
-                    st.write("### Comparing Clustering Models... 📈")
+                    st.write("### Comparing Clustering Models... ðŸ“ˆ")
                     best_model = clus.compare_models()
                     st.write("### Best Clustering Model:")
                     st.dataframe(clus.pull())
 
         elif exp_choice == "Anomaly Detection":
-            st.header('🚨 Anomaly Detection Task')
+            st.header('ðŸš¨ Anomaly Detection Task')
             st.write("In this section, you'll perform anomaly detection to identify outliers in your dataset.")
             X = st.multiselect("**Select Features for Anomaly Detection**", df.columns)
 
             if X:
                 data = df[X]
-                if st.button('🚀 Start Anomaly Detection'):
-                    st.write("Running Anomaly Detection Experiment... ⏳")
+                if st.button('ðŸš€ Start Anomaly Detection'):
+                    st.write("Running Anomaly Detection Experiment... â³")
                     anom = AnomalyExperiment()
                     anom.setup(data)
                     setup_df = anom.pull()
@@ -276,7 +279,7 @@ elif choices == 'Build Models':
                     st.write("### Anomaly Detection Setup Summary:")
                     st.dataframe(setup_df)
 
-                    st.write("### Comparing Anomaly Detection Models... 📈")
+                    st.write("### Comparing Anomaly Detection Models... ðŸ“ˆ")
                     best_model = anom.compare_models()
                     st.write("### Best Anomaly Detection Model:")
                     st.dataframe(anom.pull())
@@ -285,4 +288,4 @@ elif choices == 'Build Models':
         st.error("No dataset found. Please upload a dataset first.")
 
 elif choices == 'benGPT Chatbot':
-    ChatBot()
+    ChatBot() 
