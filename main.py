@@ -80,7 +80,7 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 # Sidebar for navigation and branding
 with st.sidebar:
     image1 = Image.open("image6.png")
-    st.image(image1, use_column_width=True, width=250)
+    st.image(image1, use_container_width=True, width=250)
     st.subheader("Ask benGPT anything")
     st.markdown("<h1 style='text-align: center; color: white; font-size: 20px;'>benjiTable DS</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: white; font-size: 14px;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
@@ -140,7 +140,7 @@ def ChatBot() -> None:
     )
 
     image1 = Image.open("image3.png")
-    st.logo(image1, use_column_width=True, width=300)
+    st.logo(image1, use_container_width=True, width=300)
     st.subheader("Ask benGPT anything")
 
     sidebar()
@@ -216,7 +216,7 @@ def history() -> None:
 # Handle page routing
 if choices == 'Upload Dataset':
     image1 = Image.open("image5.png")
-    st.image(image1, use_column_width=True, width=300)
+    st.image(image1, use_container_width=True, width=300)
     st.subheader(""" <<<👈click benGPT, Exploratory Data Analytics, Machine Learning
              """)
     st.title('📁 plug in Your Dataset')
