@@ -13,83 +13,53 @@ import google.generativeai as genai
 # Configuring the Streamlit app
 st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="🤖")
 
-# Apply custom CSS for enhanced background and smaller fonts
-page_bg_img = """
-<style>
-[data-testid="stAppViewContainer"] {
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    color: #333;
-    font-size: 14px; /* Reduced base font size */
-}
-[data-testid="stSidebar"] {
-    background: linear-gradient(135deg, #2c3e50, #34495e) !important;
-    color: white;
-    font-size: 14px; /* Reduced base font size */
-}
-[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-    color: white;
-    font-size: 18px; /* Reduced heading font size */
-}
-footer {
-    visibility: hidden;
-}
-header {
-    visibility: hidden;
-}
-body {
-    font-family: "Source Sans Pro", sans-serif;
-    font-size: 14px; /* Reduced base font size */
-}
-.stButton>button {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 14px; /* Reduced button font size */
-    border-radius: 8px;
-    padding: 8px 20px; /* Adjusted padding */
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-.stButton>button:hover {
-    background-color: #45a049;
-}
-.stMarkdown h1 {
-    font-size: 24px; /* Reduced h1 font size */
-}
-.stMarkdown h2 {
-    font-size: 20px; /* Reduced h2 font size */
-}
-.stMarkdown h3 {
-    font-size: 18px; /* Reduced h3 font size */
-}
-.stMarkdown p {
-    font-size: 14px; /* Reduced paragraph font size */
-}
-.stDataFrame {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 14px; /* Reduced dataframe font size */
-}
-.stProgress > div > div > div {
-    background-color: #4CAF50;
-}
-</style>
-"""
-st.markdown(page_bg_img, unsafe_allow_html=True)
-
-# Sidebar for navigation and branding
-with st.sidebar:
-    image1 = Image.open("image6.png")
-    st.image(image1, use_container_width=True, width=250)
-    st.subheader("Ask benGPT anything")
-    st.markdown("<h1 style='text-align: center; color: white; font-size: 20px;'>benjiTable DS</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: white; font-size: 14px;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
-    choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"], key="nav")
-    st.info("This is the Master Home for Data Science Analytics.")
-
-    st.write("---")
-    st.markdown("<h3 style='color: white; font-size: 16px;'>About</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='color: white; font-size: 14px;'>**benjiTable DS** streamlines machine learning tasks by offering intuitive data analysis, model building, and evaluation processes. Suitable for both beginners and professionals.</p>", unsafe_allow_html=True)
+# Apply custom CSS for reduced font sizes and no sidebar
+st.markdown(
+    """
+    <style>
+    [data-testid="stAppViewContainer"] {
+        background: linear-gradient(135deg, #f5f79fa, #c3cfe2);
+        color: #333;
+    }
+    body {
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 24px !important;
+    }
+    h2 {
+        font-size: 20px !important;
+    }
+    h3 {
+        font-size: 18px !important;
+    }
+    p {
+        font-size: 14px !important;
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        font-size: 14px;
+        border-radius: 8px;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    .stButton>button:hover {
+        background-color: #45a049;
+    }
+    .stDataFrame {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .stProgress > div > div > div {
+        background-color: #4CAF50;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # Google API Key Configuration for benGPT
 GOOGLE_API_KEY = 'AIzaSyCJzha8fEyQg-0F6jxHnswpEreMzxisyQw'  # Replace with your Google API Key
@@ -140,10 +110,8 @@ def ChatBot() -> None:
     )
 
     image1 = Image.open("image3.png")
-    st.logo(image1, use_column_width=True, width=300)
+    st.image(image1, use_column_width=True, width=300)
     st.subheader("Ask benGPT anything")
-
-    sidebar()
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
@@ -173,50 +141,12 @@ def ChatBot() -> None:
 
         st.session_state.history.extend([{"role": "user", "contents": prompt}, {"role": "assistant", "contents": response}])
 
-def sidebar() -> None:
-    ''' Stuff you see in the sidebar on the main page '''
-    st.session_state.creativity = st.sidebar.slider(label="**Creativity**", 
-                                                    min_value=0.0, max_value= 2.0, step=0.1,
-                                                    value=float(st.session_state.creativity), 
-                                                    help="This increases creativity of response but also decreases accuracy")
-    
-    if st.sidebar.button("Clear", use_container_width=True):
-        st.session_state.messages.clear()
-
-    st.sidebar.markdown(
-        """
-        benGPT is a powerful AI assistant designed to help you with a variety of tasks.
-
-        **Contact us:**
-        * Email: benjaminukaimo@gmail.com
-        * Phone: +2347067193071
-        """
-    )
-    image4 = Image.open("image1.png")
-    st.sidebar.image(image4, use_column_width=True)
-    if st.sidebar.button("Ask benGPT"):
-        st.session_state.show_benGPT = True
-
-def history() -> None:
-    ''' Stuff you see on History page '''
-    st.header("🕔 History", divider="red")
-
-    # Sidebar for history page
-    if st.sidebar.button("Delete", use_container_width=True):
-        st.session_state.history.clear()
-        st.session_state.messages.clear()
-
-    if st.session_state.history:
-        for message in st.session_state.history:
-            with st.chat_message(message["role"]):
-                st.markdown(message["contents"])
-    else:
-        st.subheader("Nothing to show.")
-
 # Handle page routing
+choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"], horizontal=True)
+
 if choices == 'Upload Dataset':
     image1 = Image.open("image5.png")
-    st.image(image1, use_container_width=True, width=300)
+    st.image(image1, use_column_width=True, width=300)
     st.subheader(""" <<<👈click benGPT, Exploratory Data Analytics, Machine Learning
              """)
     st.title('📁 plug in Your Dataset')
@@ -228,7 +158,7 @@ if choices == 'Upload Dataset':
         df.to_csv('dataset.csv', index=None)
         st.success('Dataset uploaded successfully!')
         st.write("### Dataset Preview:")
-        st.dataframe(df.head())
+        st.dataframe(df)
     else:
         st.warning("Please upload a CSV file to continue.")
 
@@ -239,11 +169,15 @@ elif choices == 'Explore Data':
     if os.path.exists('dataset.csv'):
         df = pd.read_csv('dataset.csv')
         st.write("### Dataset Overview:")
-        st.dataframe(df.head())
+        st.dataframe(df)
 
-        st.write("Generating detailed report... This may take a moment.")
-        profile = ProfileReport(df)
-        st_profile_report(profile)
+        # Add a button to generate the report
+        if st.button("Generate Report", key="generate_report"):
+            with st.spinner("Generating detailed report... This may take a moment."):
+                profile = ProfileReport(df)
+                st_profile_report(profile)
+        else:
+            st.info("Click the 'Generate Report' button above to create an exploratory data analysis report.")
     else:
         st.error("No dataset found. Please upload a dataset first.")
 
