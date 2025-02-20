@@ -13,19 +13,22 @@ import google.generativeai as genai
 # Configuring the Streamlit app
 st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="🤖")
 
-# Apply custom CSS for enhanced background and lighter sidebar color
+# Apply custom CSS for enhanced background and smaller fonts
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(pink, orange, white, #2c3e50, white, black);
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
+    font-size: 14px; /* Reduced base font size */
 }
 [data-testid="stSidebar"] {
-    background: linear-gradient(green, #2c3e50, white, yellow, black) !important;
+    background: linear-gradient(135deg, #2c3e50, #34495e) !important;
     color: white;
+    font-size: 14px; /* Reduced base font size */
 }
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
     color: white;
+    font-size: 18px; /* Reduced heading font size */
 }
 footer {
     visibility: hidden;
@@ -35,13 +38,14 @@ header {
 }
 body {
     font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px; /* Reduced base font size */
 }
 .stButton>button {
     background-color: #4CAF50;
     color: white;
-    font-size: 16px;
+    font-size: 14px; /* Reduced button font size */
     border-radius: 8px;
-    padding: 10px 24px;
+    padding: 8px 20px; /* Adjusted padding */
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -49,15 +53,22 @@ body {
 .stButton>button:hover {
     background-color: #45a049;
 }
-.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
-    color: #2c3e50;
+.stMarkdown h1 {
+    font-size: 24px; /* Reduced h1 font size */
+}
+.stMarkdown h2 {
+    font-size: 20px; /* Reduced h2 font size */
+}
+.stMarkdown h3 {
+    font-size: 18px; /* Reduced h3 font size */
 }
 .stMarkdown p {
-    color: #333;
+    font-size: 14px; /* Reduced paragraph font size */
 }
 .stDataFrame {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px; /* Reduced dataframe font size */
 }
 .stProgress > div > div > div {
     background-color: #4CAF50;
@@ -71,14 +82,14 @@ with st.sidebar:
     image1 = Image.open("image6.png")
     st.image(image1, use_column_width=True, width=250)
     st.subheader("Ask benGPT anything")
-    st.markdown("<h1 style='text-align: center; color: white;'>benjiTable DS</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: white;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color: white; font-size: 20px;'>benjiTable DS</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: white; font-size: 14px;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
     choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"], key="nav")
     st.info("This is the Master Home for Data Science Analytics.")
 
     st.write("---")
-    st.markdown("<h3 style='color: white;'>About</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='color: white;'>**benjiTable DS** streamlines machine learning tasks by offering intuitive data analysis, model building, and evaluation processes. Suitable for both beginners and professionals.</p>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: white; font-size: 16px;'>About</h3>", unsafe_allow_html=True)
+    st.markdown("<p style='color: white; font-size: 14px;'>**benjiTable DS** streamlines machine learning tasks by offering intuitive data analysis, model building, and evaluation processes. Suitable for both beginners and professionals.</p>", unsafe_allow_html=True)
 
 # Google API Key Configuration for benGPT
 GOOGLE_API_KEY = 'AIzaSyCJzha8fEyQg-0F6jxHnswpEreMzxisyQw'  # Replace with your Google API Key
@@ -129,7 +140,7 @@ def ChatBot() -> None:
     )
 
     image1 = Image.open("image3.png")
-    st.image(image1, use_column_width=True, width=300)
+    st.logo(image1, use_column_width=True, width=300)
     st.subheader("Ask benGPT anything")
 
     sidebar()
