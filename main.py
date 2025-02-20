@@ -13,53 +13,58 @@ import google.generativeai as genai
 # Configuring the Streamlit app
 st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="🤖")
 
-# Apply custom CSS for reduced font sizes and no sidebar
-st.markdown(
-    """
-    <style>
-    [data-testid="stAppViewContainer"] {
-        background: linear-gradient(135deg, #f5f79fa, #c3cfe2);
-        color: #333;
-    }
-    body {
-        font-size: 14px;
-    }
-    h1 {
-        font-size: 24px !important;
-    }
-    h2 {
-        font-size: 20px !important;
-    }
-    h3 {
-        font-size: 18px !important;
-    }
-    p {
-        font-size: 14px !important;
-    }
-    .stButton>button {
-        background-color: #4CAF50;
-        color: white;
-        font-size: 14px;
-        border-radius: 8px;
-        padding: 8px 16px;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-    .stButton>button:hover {
-        background-color: #45a049;
-    }
-    .stDataFrame {
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .stProgress > div > div > div {
-        background-color: #4CAF50;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# Apply custom CSS for enhanced background and lighter sidebar color
+page_bg_img = """
+<style>
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(pink, orange, white, grn, #2c3e50, white, black);
+    color: #333;
+}
+[data-testid="stSidebar"] {
+    background: linear-gradient(skyblue, blue) !important;
+    color: white;
+}
+[data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
+    color: white;
+}
+footer {
+    visibility: hidden;
+}
+header {
+    visibility: hidden;
+}
+body {
+    font-family: "Source Sans Pro", sans-serif;
+}
+.stButton>button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 10px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.stButton>button:hover {
+    background-color: #45a049;
+}
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    color: #2c3e50;
+}
+.stMarkdown p {
+    color: #333;
+}
+.stDataFrame {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.stProgress > div > div > div {
+    background-color: #4CAF50;
+}
+</style>
+"""
+st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Google API Key Configuration for benGPT
 GOOGLE_API_KEY = 'AIzaSyCJzha8fEyQg-0F6jxHnswpEreMzxisyQw'  # Replace with your Google API Key
