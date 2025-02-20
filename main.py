@@ -11,21 +11,21 @@ from PIL import Image
 import google.generativeai as genai
 
 # Configuring the Streamlit app
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_title="benjiTable DS", page_icon="🤖")
 
 # Apply custom CSS for enhanced background and lighter sidebar color
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] {
-    background-color: skyblue;
-    color: black;
+    background: linear-gradient(pink, orange, white, #2c3e50, white, black);
+    color: #333;
 }
 [data-testid="stSidebar"] {
-    background-color: gray; /* Lighter sidebar color */
-    color: black;
+    background: linear-gradient(green, #2c3e50, white, yellow, black) !important;
+    color: white;
 }
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
-    color: black;
+    color: white;
 }
 footer {
     visibility: hidden;
@@ -49,25 +49,36 @@ body {
 .stButton>button:hover {
     background-color: #45a049;
 }
+.stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
+    color: #2c3e50;
+}
+.stMarkdown p {
+    color: #333;
+}
+.stDataFrame {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.stProgress > div > div > div {
+    background-color: #4CAF50;
+}
 </style>
 """
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
-
 
 # Sidebar for navigation and branding
 with st.sidebar:
     image1 = Image.open("image6.png")
     st.image(image1, use_column_width=True, width=250)
     st.subheader("Ask benGPT anything")
-    st.markdown("<h1 style='text-align: center;'>benjiTable DS</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
-    choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"])
+    st.markdown("<h1 style='text-align: center; color: white;'>benjiTable DS</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: white;'><em>Your AI-powered ML Solutions</em></p>", unsafe_allow_html=True)
+    choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Build Models", "benGPT Chatbot"], key="nav")
     st.info("This is the Master Home for Data Science Analytics.")
 
     st.write("---")
-    st.markdown("<h3>About</h3>", unsafe_allow_html=True)
-    st.markdown("**benjiTable DS** streamlines machine learning tasks by offering intuitive data analysis, model building, and evaluation processes. Suitable for both beginners and professionals.")
+    st.markdown("<h3 style='color: white;'>About</h3>", unsafe_allow_html=True)
+    st.markdown("<p style='color: white;'>**benjiTable DS** streamlines machine learning tasks by offering intuitive data analysis, model building, and evaluation processes. Suitable for both beginners and professionals.</p>", unsafe_allow_html=True)
 
 # Google API Key Configuration for benGPT
 GOOGLE_API_KEY = 'AIzaSyCJzha8fEyQg-0F6jxHnswpEreMzxisyQw'  # Replace with your Google API Key
@@ -325,4 +336,3 @@ elif choices == 'Build Models':
 
 elif choices == 'benGPT Chatbot':
     ChatBot()
-
