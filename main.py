@@ -17,11 +17,11 @@ st.set_page_config(layout="wide")
 page_bg_img = """
 <style>
 [data-testid="stAppViewContainer"] {
-    background-color: #f5f5f5;
+    background-color: blue;
     color: black;
 }
 [data-testid="stSidebar"] {
-    background-color: #d1e0e0; /* Lighter sidebar color */
+    background-color: gray; /* Lighter sidebar color */
     color: black;
 }
 [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 {
