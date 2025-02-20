@@ -159,7 +159,7 @@ choices = st.radio("**Navigation Menu**", ["Upload Dataset", "Explore Data", "Bu
 # Handle page routing
 if choices == 'Upload Dataset':
     
-    st.title('ðŸ“ Upload Dataset For Modeling & Analysis')
+    st.title('Upload Dataset For Modeling & Analysis')
     st.write("Begin exploring and building machine learning models by uploading your dataset.")
     file = st.file_uploader("**Upload a CSV file**", type=["csv"])
     
@@ -173,7 +173,7 @@ if choices == 'Upload Dataset':
         st.warning("Please upload a CSV file to continue.")
 
 elif choices == 'Explore Data':
-    st.title('ðŸ” Exploratory Data Analysis (EDA)')
+    st.title('Exploratory Data Analysis (EDA)')
     st.write("Generate in-depth exploratory reports to understand the data before building any models.")
     
     if os.path.exists('dataset.csv'):
@@ -200,14 +200,14 @@ elif choices == 'Build Models':
         exp_choice = st.radio("Choose a Machine Learning Task", ["Classification", "Regression", "Clustering", "Anomaly Detection"])
 
         if exp_choice == "Classification":
-            st.header('ðŸ“Š Classification Task')
+            st.header('Classification Task')
             st.write("In this section, you'll train classification models to predict categorical outcomes based on your dataset.")
             X = st.multiselect("**Select Features for Training**", df.columns)
             y = st.selectbox("**Select Target Variable**", df.columns)
 
             if X and y:
                 data = df[X + [y]]
-                if st.button('ðŸš€ Start Training'):
+                if st.button('Start Training'):
                     st.write("Running Classification Experiment... â³")
                     cls = ClassificationExperiment()
                     cls.setup(data, target=y)
@@ -221,14 +221,14 @@ elif choices == 'Build Models':
                     st.dataframe(cls.pull())
 
         elif exp_choice == "Regression":
-            st.header('ðŸ“‰ Regression Task')
+            st.header('Regression Task')
             st.write("In this section, you'll train regression models to predict continuous outcomes based on your dataset.")
             X = st.multiselect("**Select Features for Training**", df.columns)
             y = st.selectbox("**Select Target Variable**", df.columns)
 
             if X and y:
                 data = df[X + [y]]
-                if st.button('ðŸš€ Start Training'):
+                if st.button('Start Training'):
                     st.write("Running Regression Experiment... â³")
                     reg = RegressionExperiment()
                     reg.setup(data, target=y)
@@ -243,13 +243,13 @@ elif choices == 'Build Models':
                     st.dataframe(reg.pull())
 
         elif exp_choice == "Clustering":
-            st.header('ðŸ” Clustering Task')
+            st.header('Clustering Task')
             st.write("In this section, you'll perform clustering to find patterns or groupings in your dataset.")
             X = st.multiselect("**Select Features for Clustering**", df.columns)
 
             if X:
                 data = df[X]
-                if st.button('ðŸš€ Start Clustering'):
+                if st.button('Start Clustering'):
                     st.write("Running Clustering Experiment... â³")
                     clus = ClusteringExperiment()
                     clus.setup(data)
@@ -264,13 +264,13 @@ elif choices == 'Build Models':
                     st.dataframe(clus.pull())
 
         elif exp_choice == "Anomaly Detection":
-            st.header('ðŸš¨ Anomaly Detection Task')
+            st.header('Anomaly Detection Task')
             st.write("In this section, you'll perform anomaly detection to identify outliers in your dataset.")
             X = st.multiselect("**Select Features for Anomaly Detection**", df.columns)
 
             if X:
                 data = df[X]
-                if st.button('ðŸš€ Start Anomaly Detection'):
+                if st.button('Start Anomaly Detection'):
                     st.write("Running Anomaly Detection Experiment... â³")
                     anom = AnomalyExperiment()
                     anom.setup(data)
